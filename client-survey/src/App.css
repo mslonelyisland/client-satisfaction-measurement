@@ -1,0 +1,134 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: #f0ecec;
+}
+/* NAVBAR */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #870d0d; 
+  padding: 10px 20px;
+  height: 50px;
+}
+
+.logo-container{
+  background-color: #870d0d; 
+}
+.logo-link {
+  background-color: #870d0d; 
+}
+.logo {
+  height: 40px;
+  margin-right: 10px;
+  margin-left: 15px;
+}
+
+/* LANDING PAGE */
+.survey-container {
+  max-width: 800px;
+  margin: 20px auto;
+  background: white;
+  border-radius: 8px;
+  outline-style: solid;
+  outline-width: 1px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+/* Banner Section */
+.banner {
+  text-align: center;
+}
+
+.banner-img {
+  max-width: 100%;
+  height: auto;
+}
+
+.survey-content {
+  padding: 20px;
+  color: #333;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.survey-content h3 {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Dropdown Section */
+.survey-dropdown {
+  margin-top: 10px;
+}
+
+.survey-dropdown select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: white;
+  cursor: pointer;
+}
+
+/* Dropdown Custom Styling */
+.survey-dropdown select option {
+  font-size: 16px;
+  padding: 10px;
+}
+
+.next-btn{
+  position: relative;
+  left: 90%;
+  margin-top: 20px;
+  background-color:#870d0d;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+@media (max-width: 600px) {
+  .survey-container {
+      width: 95%;
+      margin: 10px auto;
+  }
+
+  .survey-content {
+      padding: 15px;
+  }
+  
+}
+
+/* PER OFFICE SURVEY */
+.office-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  text-align: center;
+  background: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.office-container h1 {
+  color: #a41d21;
+  font-size: 24px;
+}
+
+.office-container p {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.6;
+}
+
