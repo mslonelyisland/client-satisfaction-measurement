@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import NavBarQuest from "../global/NavBarQuest";
 
-// Static office data (same as dropdown options)
+// Static office data (same as dropdown options) SAMPLE ONLY
 const officeOptions = [
     { id: 1, officeName: "Accounting Division", description: "Handles financial transactions and budgeting." },
     { id: 2, officeName: "Alumni and Endowment Fund Center", description: "Supports alumni relations and funding projects." },
@@ -17,11 +17,34 @@ const officeOptions = [
     { id: 11, officeName: "Legal Services Office", description: "Provides legal assistance and compliance services." },
     { id: 12, officeName: "MSU-IIT Center for Resiliency", description: "Leads disaster preparedness and climate resiliency efforts." }
 ];
+// Sample data for survey question part 3 
+const surveyQuestions3 = [
+    { name: "SQD0", text: "SQD0. I am satisfied with the service that I availed." },
+    { name: "SQD1", text: "SQD1. I spent a reasonable amount of time for my transaction." },
+    { name: "SQD2", text: "SQD2. The office followed the transaction’s requirements and steps based on the information provided." },
+    { name: "SQD3-1", text: "SQD3-1. The steps (including payment) I needed to do for my transaction were easy and simple." },
+    { name: "SQD3-2", text: "SQD3-2. The receiving/ waiting/ processing/ working area, office facilities, etc. has visual appeal and comfiness." },
+    { name: "SQD4", text: "SQD4. I easily found information about my transaction from the office or its website." },
+    { name: "SQD5", text: "SQD5. I paid a reasonable amount of fees for my transaction." },
+    { name: "SQD6", text: "SQD6. I feel the office was fair to everyone, or “walang palakasan”, during my transaction." },
+    { name: "SQD7-1", text: "SQD7-1. I was treated courteously by the staff, and (if asked for help) the staff was helpful."},
+    { name: "SQD7-2", text: "SQD7-2. The staff is knowledgeable of the functions and/or operations of the office." },
+    { name: "SQD7-3", text: "SQD7-3. The staff has the ability to complete the transaction." },
+    { name: "SQD8", text: "SQD8. I got what I needed from the government office, or (if denied) denial of request was sufficiently explained to me." },
+    { name: "SQD9", text: "SQD9. The staff shows professionalism, politeness, and willingness to help."},
+];
+const surveyQuestions3Optional = [
+    { name: "comment", type: "text", label: "To better improve our service, please state your comments/suggestions and the issues you have encountered below:", placeholder: "Your answer" },
+    { name: "email", type: "email", label: "Email address (optional):", placeholder: "Your answer" },
+    { name: "contact", type: "text", label: "Mobile Number (optional):", placeholder: "Your answer" }
+];
 
 const OfficeSurvey = () => {
     const params = useParams();
     const officeId = params.officeId; // Extract officeId from params
     const office = officeOptions.find(o => o.id.toString() === officeId);
+    const [responses, setResponses] = useState({});
+    const [showErrorModal, setShowErrorModal] = useState(false);
     const [clientType, setClientType] = useState("");
     const [serviceType, setserviceType] = useState("");
     const [userType, setUserType] = useState("");
@@ -35,24 +58,19 @@ const OfficeSurvey = () => {
     const [cc1,setCC1 ] = useState("");
     const [cc2,setCC2 ] = useState(""); 
     const [cc3,setCC3 ] = useState(""); 
-    const [SQD0,setSQD0 ] = useState(""); 
-    const [SQD1,setSQD1 ] = useState(""); 
-    const [SQD2,setSQD2 ] = useState(""); 
-    const [SQD3,setSQD3 ] = useState(""); 
-    const [SQD32,setSQD32 ] = useState(""); 
-    const [SQD4,setSQD4 ] = useState(""); 
-    const [SQD5,setSQD5 ] = useState(""); 
-    const [SQD6,setSQD6 ] = useState(""); 
-    const [SQD7,setSQD7 ] = useState(""); 
-    const [SQD72,setSQD72 ] = useState(""); 
-    const [SQD73,setSQD73 ] = useState(""); 
-    const [SQD8,setSQD8 ] = useState(""); 
-    const [SQD9,setSQD9 ] = useState(""); 
-    const [comment,setcomment ] = useState(""); 
-    const [email,setemail ] = useState(""); 
-    const [contact,setcontact ] = useState(""); 
-
+   
     const handleNext = () => setStep(step + 1);
+    // const handleNext = () => {
+    //     const unanswered = surveyQuestions3.filter(q => !responses[q.name]);
+    
+    //     if (unanswered.length > 0) {
+    //         setShowErrorModal(true);
+    //         return;
+    //     }
+    
+    //     setStep(step + 1);
+    // };
+    
     const handleBack = () => setStep(step - 1);
 
     const handleCheckboxChange = (e) => {
@@ -465,277 +483,117 @@ const OfficeSurvey = () => {
           </div>
             )}
 
-{step === 3 && (       
-          <div className="survey-container-questions">
-            <div className="survey-container-questions-left">
-              <div className="instruction-1">
-                <p className="instructions-header">INSTRUCTIONS</p>
-                <p className="description-body">
-                For Service Quality Dimensions 0-9, please tick the option that best corresponds to your
-                answer.
-                </p>
-              </div>
-              <div className="instruction-1">
-                <p className="instructions-header2">SQD0.  I am satisfied with the service that I availed.
-                
-                </p>
-                    <select 
-                        className="dropdown-select" 
-                        value={SQD0} 
-                        onChange={(e) => setSQD0(e.target.value)}
-                    >
-                        <option value="">-- Select One --</option>
-                        <option value="Strongly Disagree">Strongly Disagree</option>
-                        <option value="Disagree">Disagree</option>
-                        <option value="Neither Agree nor Disagree">Neither Agree nor Disagree</option>
-                        <option value="Agree">Agree</option>
-                        <option value="Strongly Agree">Strongly Agree</option>
-                        <option value="Not Applicable">Not Applicable</option>
-                    </select>
-              </div>
-              <div className="instruction-1">
-                <p className="instructions-header2">SQD1. I spent a reasonable amount of time for my transaction.                
-                </p>
-                    <select 
-                    className="dropdown-select" 
-                    value={SQD1} 
-                    onChange={(e) => setSQD1(e.target.value)}
-                    >
-                        <option value="">-- Select One --</option>
-                        <option value="Strongly Disagree">Strongly Disagree</option>
-                        <option value="Disagree">Disagree</option>
-                        <option value="Neither Agree nor Disagree">Neither Agree nor Disagree</option>
-                        <option value="Agree">Agree</option>
-                        <option value="Strongly Agree">Strongly Agree</option>
-                        <option value="Not Applicable">Not Applicable</option>
-                </select>
-              </div>
-              <div className="instruction-1">
-                <p className="instructions-header2">SQD2. The office followed the transaction’s requirements and steps based on the information provided.               
-                </p>
-                    <select 
-                    className="dropdown-select" 
-                    value={SQD2} 
-                    onChange={(e) => setSQD2(e.target.value)}
-                    >
-                        <option value="">-- Select One --</option>
-                        <option value="Strongly Disagree">Strongly Disagree</option>
-                        <option value="Disagree">Disagree</option>
-                        <option value="Neither Agree nor Disagree">Neither Agree nor Disagree</option>
-                        <option value="Agree">Agree</option>
-                        <option value="Strongly Agree">Strongly Agree</option>
-                        <option value="Not Applicable">Not Applicable</option>
-                </select>
-              </div>
-              <div className="instruction-1">
-                <p className="instructions-header2">SQD3-1. The steps (including payment) I needed to do for my transaction were easy and simple.           
-                </p>
-                    <select 
-                    className="dropdown-select" 
-                    value={SQD3} 
-                    onChange={(e) => setSQD3(e.target.value)}
-                    >
-                        <option value="">-- Select One --</option>
-                        <option value="Strongly Disagree">Strongly Disagree</option>
-                        <option value="Disagree">Disagree</option>
-                        <option value="Neither Agree nor Disagree">Neither Agree nor Disagree</option>
-                        <option value="Agree">Agree</option>
-                        <option value="Strongly Agree">Strongly Agree</option>
-                        <option value="Not Applicable">Not Applicable</option>
-                </select>
-              </div>
-              <div className="instruction-1">
-                <p className="instructions-header2">SQD3-2. The receiving/ waiting/ processing/ working area, office facilities, etc. has visual appeal and comfiness.         
-                </p>
-                    <select 
-                    className="dropdown-select" 
-                    value={SQD32} 
-                    onChange={(e) => setSQD32(e.target.value)}
-                    >
-                        <option value="">-- Select One --</option>
-                        <option value="Strongly Disagree">Strongly Disagree</option>
-                        <option value="Disagree">Disagree</option>
-                        <option value="Neither Agree nor Disagree">Neither Agree nor Disagree</option>
-                        <option value="Agree">Agree</option>
-                        <option value="Strongly Agree">Strongly Agree</option>
-                        <option value="Not Applicable">Not Applicable</option>
-                </select>
-              </div>
-              <div className="instruction-1">
-                <p className="instructions-header2">SQD4. I easily found information about my transaction from the office or its website.        
-                </p>
-                    <select 
-                    className="dropdown-select" 
-                    value={SQD4} 
-                    onChange={(e) => setSQD4(e.target.value)}
-                    >
-                        <option value="">-- Select One --</option>
-                        <option value="Strongly Disagree">Strongly Disagree</option>
-                        <option value="Disagree">Disagree</option>
-                        <option value="Neither Agree nor Disagree">Neither Agree nor Disagree</option>
-                        <option value="Agree">Agree</option>
-                        <option value="Strongly Agree">Strongly Agree</option>
-                        <option value="Not Applicable">Not Applicable</option>
-                </select>
-              </div>
-              <div className="instruction-1">
-                <p className="instructions-header2">SQD5. I paid a reasonable amount of fees for my transaction.        
-                </p>
-                    <select 
-                    className="dropdown-select" 
-                    value={SQD5} 
-                    onChange={(e) => setSQD5(e.target.value)}
-                    >
-                        <option value="">-- Select One --</option>
-                        <option value="Strongly Disagree">Strongly Disagree</option>
-                        <option value="Disagree">Disagree</option>
-                        <option value="Neither Agree nor Disagree">Neither Agree nor Disagree</option>
-                        <option value="Agree">Agree</option>
-                        <option value="Strongly Agree">Strongly Agree</option>
-                        <option value="Not Applicable">Not Applicable</option>
-                </select>
-              </div>
-              <div className="instruction-1">
-                <p className="instructions-header2">SQD6. I feel the office was fair to everyone, or “walang palakasan”, during my transaction.       
-                </p>
-                    <select 
-                    className="dropdown-select" 
-                    value={SQD6} 
-                    onChange={(e) => setSQD6(e.target.value)}
-                    >
-                        <option value="">-- Select One --</option>
-                        <option value="Strongly Disagree">Strongly Disagree</option>
-                        <option value="Disagree">Disagree</option>
-                        <option value="Neither Agree nor Disagree">Neither Agree nor Disagree</option>
-                        <option value="Agree">Agree</option>
-                        <option value="Strongly Agree">Strongly Agree</option>
-                        <option value="Not Applicable">Not Applicable</option>
-                </select>
-              </div>
-            </div>
-            
-            <div className="survey-container-questions-right">
-            <div className="instruction-1">
-                <p className="instructions-header2">SQD7-1. I was treated courteously by the staff, and (if asked for help) the staff was helpful.     
-                </p>
-                    <select 
-                    className="dropdown-select" 
-                    value={SQD7} 
-                    onChange={(e) => setSQD7(e.target.value)}
-                    >
-                        <option value="">-- Select One --</option>
-                        <option value="Strongly Disagree">Strongly Disagree</option>
-                        <option value="Disagree">Disagree</option>
-                        <option value="Neither Agree nor Disagree">Neither Agree nor Disagree</option>
-                        <option value="Agree">Agree</option>
-                        <option value="Strongly Agree">Strongly Agree</option>
-                        <option value="Not Applicable">Not Applicable</option>
-                </select>
-              </div>
-              <div className="instruction-1">
-                <p className="instructions-header2">SQD7-2. The staff is knowledgeable of the functions and/or operations of the office.   
-                </p>
-                    <select 
-                    className="dropdown-select" 
-                    value={SQD72} 
-                    onChange={(e) => setSQD72(e.target.value)}
-                    >
-                        <option value="">-- Select One --</option>
-                        <option value="Strongly Disagree">Strongly Disagree</option>
-                        <option value="Disagree">Disagree</option>
-                        <option value="Neither Agree nor Disagree">Neither Agree nor Disagree</option>
-                        <option value="Agree">Agree</option>
-                        <option value="Strongly Agree">Strongly Agree</option>
-                        <option value="Not Applicable">Not Applicable</option>
-                </select>
-              </div>
-              <div className="instruction-1">
-                <p className="instructions-header2">SQD7-3. The staff has the ability to complete the transaction.   
-                </p>
-                    <select 
-                    className="dropdown-select" 
-                    value={SQD73} 
-                    onChange={(e) => setSQD73(e.target.value)}
-                    >
-                        <option value="">-- Select One --</option>
-                        <option value="Strongly Disagree">Strongly Disagree</option>
-                        <option value="Disagree">Disagree</option>
-                        <option value="Neither Agree nor Disagree">Neither Agree nor Disagree</option>
-                        <option value="Agree">Agree</option>
-                        <option value="Strongly Agree">Strongly Agree</option>
-                        <option value="Not Applicable">Not Applicable</option>
-                </select>
-              </div>
-              <div className="instruction-1">
-                <p className="instructions-header2">SQD8. I got what I needed from the government office, or (if denied) denial of request was sufficiently explained to me.
-                </p>
-                    <select 
-                    className="dropdown-select" 
-                    value={SQD8} 
-                    onChange={(e) => setSQD8(e.target.value)}
-                    >
-                        <option value="">-- Select One --</option>
-                        <option value="Strongly Disagree">Strongly Disagree</option>
-                        <option value="Disagree">Disagree</option>
-                        <option value="Neither Agree nor Disagree">Neither Agree nor Disagree</option>
-                        <option value="Agree">Agree</option>
-                        <option value="Strongly Agree">Strongly Agree</option>
-                        <option value="Not Applicable">Not Applicable</option>
-                </select>
-              </div>
-              <div className="instruction-1">
-                <p className="instructions-header2">SQD9. The staff shows professionalism, politeness, and willingness to help.
-                </p>
-                    <select 
-                    className="dropdown-select" 
-                    value={SQD9} 
-                    onChange={(e) => setSQD9(e.target.value)}
-                    >
-                        <option value="">-- Select One --</option>
-                        <option value="Strongly Disagree">Strongly Disagree</option>
-                        <option value="Disagree">Disagree</option>
-                        <option value="Neither Agree nor Disagree">Neither Agree nor Disagree</option>
-                        <option value="Agree">Agree</option>
-                        <option value="Strongly Agree">Strongly Agree</option>
-                        <option value="Not Applicable">Not Applicable</option>
-                </select>
-              </div>
-              <div className="instruction-1">
-                        <p className="instructions-header2">To better improve our service, please state your comments/suggestions and the issues you have encountered below: </p>
-                        <input 
-                          type="text"  // Enforce numeric input
-                          name="comment" 
-                          className="input-full"  // Add class for styling
-                          value={comment}
-                          onChange={(e) => setcomment(e.target.value)}
-                          placeholder="Comment here" // Adds a placeholder for better UX
-                        />
-                      </div>
-                      <div className="instruction-1">
-                        <p className="instructions-header2">Email Address (optional): </p>
-                        <input 
-                          type="email"  // Enforce numeric input
-                          name="email" 
-                          className="input-full"  // Add class for styling
-                          value={email}
-                          onChange={(e) => setemail(e.target.value)}
-                          placeholder="Please input your email address" // Adds a placeholder for better UX
-                        />
-                      </div>
-                      <div className="instruction-1">
-                        <p className="instructions-header2">Mobile Number (optional): </p>
-                        <input 
-                          type="text"  // Enforce numeric input
-                          name="contact" 
-                          className="input-full"  // Add class for styling
-                          value={contact}
-                          onChange={(e) => setcontact(e.target.value)}
-                          placeholder="Please input your contact number" // Adds a placeholder for better UX
-                        />
-                      </div>
-            </div>
-          </div>
-)}
+            {step === 3 && (       
+                <div className="survey-container-questions">
+                    {/* LEFT COLUMN */}
+                    <div className="survey-container-questions-left">
+                        <div className="instruction-1">
+                            <p className="instructions-header">INSTRUCTIONS</p>
+                            <p className="description-body">
+                                For Service Quality Dimensions 0-9, please tick the option that best corresponds to your answer.
+                            </p>
+                        </div>
+
+                        {/* First Half of Questions */}
+                        {surveyQuestions3.slice(0, Math.ceil(surveyQuestions3.length / 2)).map((question, index) => (
+                            <div key={index} className="instruction-1">
+                                <p className="instructions-header2">{question.text}</p>
+                                <div className="radio-container">
+                                    <div className="radio-column">
+                                        {["Strongly Disagree", "Disagree", "Neither Agree nor Disagree"].map((option) => (
+                                            <label key={option} className="radio-label">
+                                                <input 
+                                                    type="radio" 
+                                                    name={question.name} 
+                                                    value={option} 
+                                                    checked={responses[question.name] === option} 
+                                                    onChange={(e) => setResponses({ ...responses, [question.name]: e.target.value })} 
+                                                    className="radio-button"
+                                                />
+                                                {option}
+                                            </label>
+                                        ))}
+                                    </div>
+                                    <div className="radio-column">
+                                        {["Agree", "Strongly Agree", "Not Applicable"].map((option) => (
+                                            <label key={option} className="radio-label">
+                                                <input 
+                                                    type="radio" 
+                                                    name={question.name} 
+                                                    value={option} 
+                                                    checked={responses[question.name] === option} 
+                                                    onChange={(e) => setResponses({ ...responses, [question.name]: e.target.value })} 
+                                                    className="radio-button"
+                                                />
+                                                {option}
+                                            </label>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* RIGHT COLUMN */}
+                    <div className="survey-container-questions-right">
+                        {/* Second Half of Questions */}
+                        {surveyQuestions3.slice(Math.ceil(surveyQuestions3.length / 2)).map((question, index) => (
+                            <div key={index} className="instruction-1">
+                                <p className="instructions-header2">{question.text}</p>
+                                <div className="radio-container">
+                                    <div className="radio-column">
+                                        {["Strongly Disagree", "Disagree", "Neither Agree nor Disagree"].map((option) => (
+                                            <label key={option} className="radio-label">
+                                                <input 
+                                                    type="radio" 
+                                                    name={question.name} 
+                                                    value={option} 
+                                                    checked={responses[question.name] === option} 
+                                                    onChange={(e) => setResponses({ ...responses, [question.name]: e.target.value })} 
+                                                    className="radio-button"
+                                                />
+                                                {option}
+                                            </label>
+                                        ))}
+                                    </div>
+                                    <div className="radio-column">
+                                        {["Agree", "Strongly Agree", "Not Applicable"].map((option) => (
+                                            <label key={option} className="radio-label">
+                                                <input 
+                                                    type="radio" 
+                                                    name={question.name} 
+                                                    value={option} 
+                                                    checked={responses[question.name] === option} 
+                                                    onChange={(e) => setResponses({ ...responses, [question.name]: e.target.value })} 
+                                                    className="radio-button"
+                                                />
+                                                {option}
+                                            </label>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+
+                        {/* Additional Fields (Comment, Email, Mobile Number) */}
+                        {surveyQuestions3Optional.map((field, index) => (
+                            <div key={index} className="instruction-1 additional-field">
+                                <p className="instructions-header2">{field.label}</p>
+                                <input 
+                                    type={field.type}  
+                                    name={field.name} 
+                                    className="input-full"
+                                    value={responses[field.name] || ""}
+                                    onChange={(e) => setResponses({ ...responses, [field.name]: e.target.value })}
+                                    placeholder={field.placeholder}
+                                />
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
+
+
                     {/* Navigation Buttons */}
                     <div className="button-container">
                     {step > 1 && (
@@ -743,11 +601,19 @@ const OfficeSurvey = () => {
                         Back
                         </button>
                     )}
+                    {/* {showErrorModal && (
+                    <div className="error-modal">
+                        <div className="error-content">
+                            <p>Please answer all required questions before proceeding.</p>
+                            <button onClick={() => setShowErrorModal(false)}>OK</button>
+                        </div>
+                    </div>
+                )} */}
 
                     {step < 3 ? (
                         <button className="next-button" onClick={handleNext}>
                         Next
-                        </button>
+                    </button>
                     ) : (
                         <button className="submit-button" onClick={() => alert("Survey Submitted!")}>
                         Submit
