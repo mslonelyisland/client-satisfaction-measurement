@@ -1,0 +1,90 @@
+/* Login Container */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #f4f4f4;
+}
+.logo{
+    outline-style: solid;
+    outline-width: 1px;
+    outline-color: #870d0d;
+}
+/* Login Box */
+.login-box label {
+    display: block;  
+    text-align: left; 
+    width: 80%; 
+}
+
+.login-box {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 30%;
+    text-align: center;
+}
+.login-box p {
+    margin: 20px;
+    color: #a41d21;
+}
+/* Input Fields */
+.login-box input {
+    display: flex;
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Error Message */
+p.error {
+    color: red;
+    font-size: 14px;
+    text-align: left;
+    margin: 0;
+}
+
+/* Login Button */
+.login-box button {
+    width: 30%;
+    padding: 10px;
+    background-color: #a41d21;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.login-box button:hover {
+    background-color: #870d0d;
+}
+
+@media (max-width: 760px) {
+    .login-box {
+        width: 60%;
+        padding: 20px;
+    }
+    .login-box button{
+        width: 50%;
+    }
+}
+@media (max-width: 480px) {
+    .login-box {
+        width: 80%; /* Make form take up most of the screen */
+        padding: 20px;
+    }
+
+    .login-box input {
+        font-size: 14px; /* Slightly smaller input text */
+    }
+
+    .login-box button {
+        width: 30%;
+    }
+}
