@@ -577,18 +577,30 @@ const OfficeSurvey = () => {
 
                         {/* Additional Fields (Comment, Email, Mobile Number) */}
                         {surveyQuestions3Optional.map((field, index) => (
-                            <div key={index} className="instruction-1 additional-field">
-                                <p className="instructions-header2">{field.label}</p>
-                                <input 
-                                    type={field.type}  
-                                    name={field.name} 
+                        <div key={index} className="instruction-1 additional-field">
+                            <p className="instructions-header2">{field.label}</p>
+                            {field.name === "comment" ? (
+                                <textarea
+                                    name={field.name}
+                                    className="input-full"
+                                    value={responses[field.name] || ""}
+                                    onChange={(e) => setResponses({ ...responses, [field.name]: e.target.value })}
+                                    placeholder={field.placeholder}
+                                    rows="4"  // 4 rows for comment suggestion
+                                />
+                            ) : (
+                                <input
+                                    type={field.type}
+                                    name={field.name}
                                     className="input-full"
                                     value={responses[field.name] || ""}
                                     onChange={(e) => setResponses({ ...responses, [field.name]: e.target.value })}
                                     placeholder={field.placeholder}
                                 />
-                            </div>
-                        ))}
+                            )}
+                        </div>
+                    ))}
+
                     </div>
                 </div>
             )}
